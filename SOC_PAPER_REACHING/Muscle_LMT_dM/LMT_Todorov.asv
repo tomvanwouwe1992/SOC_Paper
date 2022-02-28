@@ -1,0 +1,140 @@
+clc; clear all; close all;
+
+%%% Compute muscle lengths based on Todorov moment arms and LMT ranges
+%%% throughout movement ROM
+figure(1)
+theta_shoulder = pi/180*[0 180];
+theta_elbow = pi/180*[0 180];
+
+theta_shoulder = interp1([0,1],theta_shoulder,0:0.01:1);
+theta_elbow = interp1([0,1],theta_elbow,0:0.01:1);
+
+load('dM_coefficients.mat')
+
+% m1 - Biceps long, Brachialis, Brachioradialis (elbow flexor)
+% Operating range 0.6 - 1.1
+a_m1_shoulder = dM_coefficients(1,1);
+b_m1_shoulder = dM_coefficients(1,2);
+c_m1_shoulder = dM_coefficients(1,3);
+a_m1_elbow = dM_coefficients(1,4);
+b_m1_elbow = dM_coefficients(1,5);
+c_m1_elbow = dM_coefficients(1,6);
+l_m1_0_0 = l_Range_2DOF(a_m1_shoulder,b_m1_shoulder,c_m1_shoulder,a_m1_elbow,b_m1_elbow,c_m1_elbow,0,0);
+l_m1_180_180 = l_Range_2DOF(a_m1_shoulder,b_m1_shoulder,c_m1_shoulder,a_m1_elbow,b_m1_elbow,c_m1_elbow,pi,pi);
+l_m1_multiplier = (1.1-0.6)/(l_m1_0_0-l_m1_180_180);
+l_m1_base = 1.1;
+
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+l_m1 = l_Muscle_2DOF(a_m1_shoulder,b_m1_shoulder,c_m1_shoulder,a_m1_elbow,b_m1_elbow,c_m1_elbow,l_m1_multiplier,l_m1_base,theta_shoulder,theta_elbow);
+subplot(2,3,1)
+meshc(180/pi*theta_shoulder_grid, 180/pi*theta_elbow_grid, l_m1);
+xlabel('shoulder')
+ylabel('elbow')
+title('m1 - Brachialis')
+
+% m2 - Biceps long, Brachialis, Brachioradialis (elbow flexor)
+% Operating range 0.8 - 1.25
+a_m2_shoulder = dM_coefficients(2,1);
+b_m2_shoulder = dM_coefficients(2,2);
+c_m2_shoulder = dM_coefficients(2,3);
+a_m2_elbow = dM_coefficients(2,4);
+b_m2_elbow = dM_coefficients(2,5);
+c_m2_elbow = dM_coefficients(2,6);
+l_m2_0_0 = l_Range_2DOF(a_m2_shoulder,b_m2_shoulder,c_m2_shoulder,a_m2_elbow,b_m2_elbow,c_m2_elbow,0,0);
+l_m2_180_180 = l_Range_2DOF(a_m2_shoulder,b_m2_shoulder,c_m2_shoulder,a_m2_elbow,b_m2_elbow,c_m2_elbow,pi,pi);
+l_m2_multiplier = (0.8-1.25)/(l_m2_0_0-l_m2_180_180);
+l_m2_base = 0.8;
+
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+l_m2 = l_Muscle_2DOF(a_m2_shoulder,b_m2_shoulder,c_m2_shoulder,a_m2_elbow,b_m2_elbow,c_m2_elbow,l_m2_multiplier,l_m2_base,theta_shoulder,theta_elbow);
+subplot(2,3,2)
+meshc(180/pi*theta_shoulder_grid, 180/pi*theta_elbow_grid, l_m2);
+xlabel('shoulder')
+ylabel('elbow')
+title('m2 - Lateral triceps')
+
+% m3 - Anterior deltoid (shoulder flexor)
+% Operating range 0.7 - 1.2
+a_m3_shoulder = dM_coefficients(3,1);
+b_m3_shoulder = dM_coefficients(3,2);
+c_m3_shoulder = dM_coefficients(3,3);
+a_m3_elbow = dM_coefficients(3,4);
+b_m3_elbow = dM_coefficients(3,5);
+c_m3_elbow = dM_coefficients(3,6);
+l_m3_0_0 = l_Range_2DOF(a_m3_shoulder,b_m3_shoulder,c_m3_shoulder,a_m3_elbow,b_m3_elbow,c_m3_elbow,0,0);
+l_m3_180_180 = l_Range_2DOF(a_m3_shoulder,b_m3_shoulder,c_m3_shoulder,a_m3_elbow,b_m3_elbow,c_m3_elbow,pi,pi);
+l_m3_multiplier = (1.2-0.7)/(l_m3_0_0-l_m3_180_180);
+l_m3_base = 1.2;
+
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+l_m3 = l_Muscle_2DOF(a_m3_shoulder,b_m3_shoulder,c_m3_shoulder,a_m3_elbow,b_m3_elbow,c_m3_elbow,l_m3_multiplier,l_m3_base,theta_shoulder,theta_elbow);
+subplot(2,3,3)
+meshc(180/pi*theta_shoulder_grid, 180/pi*theta_elbow_grid, l_m3);
+xlabel('shoulder')
+ylabel('elbow')
+title('m3 - anterior deltoid')
+
+% m4 - Anterior deltoid (shoulder extensor)
+% Operating range 0.7 - 1.1
+a_m4_shoulder = dM_coefficients(3,1);
+b_m4_shoulder = dM_coefficients(3,2);
+c_m4_shoulder = dM_coefficients(3,3);
+a_m4_elbow = dM_coefficients(3,4);
+b_m4_elbow = dM_coefficients(3,5);
+c_m4_elbow = dM_coefficients(3,6);
+l_m4_0_0 = l_Range_2DOF(a_m4_shoulder,b_m4_shoulder,c_m4_shoulder,a_m4_elbow,b_m4_elbow,c_m4_elbow,0,0);
+l_m4_180_180 = l_Range_2DOF(a_m4_shoulder,b_m4_shoulder,c_m4_shoulder,a_m4_elbow,b_m4_elbow,c_m4_elbow,pi,pi);
+l_m4_multiplier = (0.7 - 1.1)/(l_m4_0_0-l_m4_180_180);
+l_m4_base = 1.2;
+
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+l_m4 = l_Muscle_2DOF(a_m4_shoulder,b_m4_shoulder,c_m4_shoulder,a_m4_elbow,b_m4_elbow,c_m4_elbow,l_m4_multiplier,l_m4_base,theta_shoulder,theta_elbow);
+subplot(2,3,4)
+meshc(180/pi*theta_shoulder_grid, 180/pi*theta_elbow_grid, l_m4);
+xlabel('shoulder')
+ylabel('elbow')
+title('m4 - anterior deltoid')
+
+
+
+% m5 - Biceps long, Brachialis, Brachioradialis (elbow flexor)
+% Operating range 0.6 - 1.1
+a_m5_shoulder = dM_coefficients(5,1);
+b_m5_shoulder = dM_coefficients(5,2);
+c_m5_shoulder = dM_coefficients(5,3);
+a_m5_elbow = dM_coefficients(5,4);
+b_m5_elbow = dM_coefficients(5,5);
+c_m5_elbow = dM_coefficients(5,6);
+
+l_m5_0_0 = l_Range_2DOF(a_m5_shoulder,b_m5_shoulder,c_m5_shoulder,a_m5_elbow,b_m5_elbow,c_m5_elbow,0,0);
+l_m5_180_180 = l_Range_2DOF(a_m5_shoulder,b_m5_shoulder,c_m5_shoulder,a_m5_elbow,b_m5_elbow,c_m5_elbow,pi,pi);
+l_m5_multiplier = (1.1-0.6)/(l_m5_0_0-l_m5_180_180);
+l_m5_base = 1.1;
+
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+l_m5 = l_Muscle_2DOF(a_m5_shoulder,b_m5_shoulder,c_m5_shoulder,a_m5_elbow,b_m5_elbow,c_m5_elbow,l_m5_multiplier,l_m5_base,theta_shoulder,theta_elbow);
+meshc(180/pi*theta_shoulder_grid, 180/pi*theta_elbow_grid, l_m5);
+
+
+function l_range = l_Range_2DOF(a_shoulder,b_shoulder,c_shoulder,a_elbow,b_elbow,c_elbow,theta_shoulder,theta_elbow)
+if c_shoulder == 0
+    c_shoulder = 0.01;
+end
+if c_elbow == 0
+    c_elbow = 0.01;
+end
+l_range = a_shoulder*theta_shoulder + b_shoulder*sin(c_shoulder*theta_shoulder)/c_shoulder + a_elbow*theta_elbow + b_elbow*sin(c_elbow*theta_elbow)/c_elbow;
+end
+
+function l_muscle = l_Muscle_2DOF(a_shoulder,b_shoulder,c_shoulder,a_elbow,b_elbow,c_elbow,l_multiplier,l_base,theta_shoulder,theta_elbow)
+if c_shoulder == 0
+    c_shoulder = 0.01;
+end
+if c_elbow == 0
+    c_elbow = 0.01;
+end
+[theta_shoulder_grid,theta_elbow_grid] = meshgrid(theta_shoulder,theta_elbow);
+
+l_full = a_shoulder*theta_shoulder_grid + b_shoulder*sin(c_shoulder*theta_shoulder_grid)/c_shoulder + a_elbow*theta_elbow_grid + b_elbow*sin(c_elbow*theta_elbow_grid)/c_elbow;
+l_muscle = l_full*l_multiplier + l_base;
+end
