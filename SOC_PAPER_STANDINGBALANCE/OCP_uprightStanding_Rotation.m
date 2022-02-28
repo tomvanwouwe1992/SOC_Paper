@@ -234,7 +234,7 @@ opti_nominal.subject_to(L(varIndices_P,1) - 1e-5 > 0);
 
 % Create an NLP solver
 % optionssol.ipopt.nlp_scaling_method = 'none';
-optionssol.ipopt.linear_solver = 'ma57';
+optionssol.ipopt.linear_solver = 'mumps';
 optionssol.ipopt.constr_viol_tol = 1e-8;
 optionssol.ipopt.dual_inf_tol = 1e-4;
 optionssol.ipopt.max_iter = 10000;

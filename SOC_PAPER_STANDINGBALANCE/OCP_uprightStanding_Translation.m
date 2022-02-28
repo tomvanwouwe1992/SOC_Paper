@@ -211,7 +211,7 @@ opti_nominal.set_initial(L(covarIndices_P,1) , 0);
 % Create an NLP solver
 output.setup.auxdata = auxdata;
 % optionssol.ipopt.nlp_scaling_method = 'none';
-optionssol.ipopt.linear_solver = 'ma57';
+optionssol.ipopt.linear_solver = 'mumps';
 optionssol.ipopt.tol = 1e-7;
 optionssol.ipopt.max_iter = 10000;
 % optionssol.ipopt.hessian_approximation = 'limited-memory';

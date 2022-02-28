@@ -197,7 +197,7 @@ opti.minimize(1e3*((sumsqr(e_ff)+sumsqr(X(1:4,:)))/2+J_fb)*dt);
 
 %% Setup solver
 % optionssol.ipopt.nlp_scaling_method = 'gradient-based';
-optionssol.ipopt.linear_solver = 'ma57';
+optionssol.ipopt.linear_solver = 'mumps';
 optionssol.ipopt.tol = 1e-3; % output.setup.nlp.ipoptoptions.tolerance;
 optionssol.ipopt.dual_inf_tol = 3e-4;
 optionssol.ipopt.constr_viol_tol = 1e-8;
