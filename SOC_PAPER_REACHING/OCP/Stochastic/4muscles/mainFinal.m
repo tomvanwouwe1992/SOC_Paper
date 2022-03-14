@@ -19,7 +19,7 @@ for i = 1:length(wM_std_VEC)
             
             
             if contains( [listing(:).name] ,saveName )
-                [result,succes] = OCP_4muscles_FF_FB_final(target,forceField,wM_std,wPq_std,wPqdot_std,guessName);
+                [result,succes] = OCP_4muscles_FF_FB_final_DCversion(target,forceField,wM_std,wPq_std,wPqdot_std,guessName);
                 if succes == true
                     parsave(saveName,result);
                 end
