@@ -9,6 +9,6 @@ You will need to install CasADi (https://web.casadi.org/) to solve the defined o
  - in some cases the linear solver 'ma57' is more performant, but it is not open-source
 
 
-In the folder with implentations for the reaching model driven by four Hill-type muscles we provide two implementations (SOC_Paper\SOC_PAPER_REACHING\OCP\Stochastic\4muscles).
+For the muscle driven reaching simulations we provide two implementations.
  - The standard one: the covariance matrix is propagated in time using a shooting formulation
- - DC: the covariance matrix is propagated in time using a shooting formulation
+ - DCversion: the covariance matrix is propagated in time using a shooting formulation
