@@ -11,4 +11,4 @@ You will need to install CasADi (https://web.casadi.org/) to solve the defined o
 
 For the muscle driven reaching simulations we provide two implementations.
  - The standard one: the covariance matrix is propagated in time using a shooting formulation
- - DCversion: the covariance matrix is propagated in time using a shooting formulation
+ - DCversion: the covariance matrix is propagated in time using a direct collocation formulation
