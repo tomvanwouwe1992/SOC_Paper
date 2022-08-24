@@ -1,7 +1,7 @@
 # SOC_Paper
-Code for simulations of our paper (in revision): "An approximate stochastic optimal control framework to simulate nonlinear neuro-musculoskeletal models in the presence of noise"
+Code for simulations of our paper: "An approximate stochastic optimal control framework to simulate nonlinear neuro-musculoskeletal models in the presence of noise"
 
-https://www.biorxiv.org/content/10.1101/2021.08.13.456221v1
+https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009338
 
 
 You will need to install CasADi (https://web.casadi.org/) to solve the defined optimal control problems.
